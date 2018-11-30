@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="theme-color" content="#000000">
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
+    <!-- matirialized css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <title>React App - Upload File</title>
+  </head>
+
+  <body>
+    <!-- JQuery for matirialized css -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <!-- matirialized script-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script lang="javascript" src="dist/xlsx.full.min.js"></script>
+
+    <script lang="javascript">
+        //Check validation before submit form
+        function validateForm(){
+            //Check field not empty
+            if(filename.value == ""){
+                document.getElementById("comments").innerHTML = "Error: Please select file to upload!";
+                return false;    
+            }
+
+            //Check file type - Only Excel Files
+            var filetypes = /.xls|.xlsx/
+            if(filetypes.exec(filename.value.toLowerCase()) == null){
+                document.getElementById("comments").innerHTML = "Error: Excel Files Only (xls or xlsx)!";
+                return false;    
+            }
+            return true;            
+        }
+    </script>
+
+    <div class="container">
+        <h1>Upload Excel File</h1>
+        <p><b>Programmer name:</b> Shauli Golan - 052-7622263</p>
+    <br>
+    <div id="comments">&nbsp;</div>
+    <br>
+    <form action="/" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
+      <div class="file-field input-field">
+          <div class="btn grey">
+              <span>File</span>
+              <input name="filename" id="filename" type="file" onclick="document.getElementById('comments').innerHTML='&nbsp;';">
+          </div>
+          <div class="file-path-wrapper">
+              <input class="file-path validate" type="text" >
+          </div>
+      </div>
+      <button type="submit" class="btn">upload file</button>
+    </form>
+  </div>
+  <br>
+  <!-- place for data -->
+    <div id="root"></div>
+
+  </body>
+</html>
